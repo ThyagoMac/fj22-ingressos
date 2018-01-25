@@ -1,7 +1,6 @@
 package br.com.caelum.ingresso.validacao;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import br.com.caelum.ingresso.model.Sessao;
@@ -15,17 +14,12 @@ public class GerenciadorDeSessao {
 
 	private boolean horarioIsConflitante(Sessao sessaoExistente,
 			Sessao sessaoNova) {
-		LocalDate hoje = LocalDate.now();
-
-		LocalDateTime horarioSessaoExistente = sessaoExistente.getHorario()
-				.atDate(hoje);
-		LocalDateTime horarioSessaoNova = sessaoNova.getHorario().atDate(hoje);
-
-		boolean terminaAntes = sessaoNova.getHorarioTermino().atDate(hoje).isBefore(
+		LocalTime horarioSessaoExistente = sessaoExistente.getHorario();
+		LocalTime horarioSessaoNova = sessaoNova.getHorario();
+		boolean terminaAntes = sessaoNova.getHorarioTermino().isBefore(
 				horarioSessaoExistente);
-		boolean comecaDepois = sessaoExistente.getHorarioTermino().atDate(hoje).isBefore(
+		boolean comecaDepois = sessaoExistente.getHorarioTermino().isBefore(
 				horarioSessaoNova);
-
 		if (terminaAntes || comecaDepois) {
 			return false;
 		}
