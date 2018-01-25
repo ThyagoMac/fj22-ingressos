@@ -9,21 +9,19 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Sessao {
-	
+
 	@Id
 	@GeneratedValue
 	private Integer id;
 	private LocalTime horario;
-	
+
 	@ManyToOne
 	private Sala sala;
 	
 	@ManyToOne
 	private Filme filme;
 	
-	/**
-	* @deprecated hibernate only
-	*/
+	/** Hibernate usar o constructor vazio */
 	public Sessao() {
 	}
 
@@ -68,4 +66,5 @@ public class Sessao {
 	public void setFilme(Filme filme) {
 		this.filme = filme;
 	}
+
 }
